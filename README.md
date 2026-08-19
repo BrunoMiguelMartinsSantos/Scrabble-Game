@@ -1,11 +1,8 @@
 # Scrabble in Python
 
-
 A two-stage implementation of a **Scrabble-inspired game in Python**, developed progressively from a basic terminal-based version into a more advanced version with modular abstractions, vocabulary management and automated players.
 
-
 ## Repository Structure
-
 
 ```text
 Scrabble-Game/
@@ -14,7 +11,9 @@ Scrabble-Game/
 ├── scrabble-v2/
 │   └── scrabble2.py
 └── README.md
-Overview
+```
+
+## Overview
 
 This repository contains two versions of the same Scrabble project.
 
@@ -22,69 +21,85 @@ The first version focuses on implementing the core mechanics of the game.
 
 The second version builds on those concepts and introduces a more modular architecture, vocabulary management and AI-controlled players.
 
-Version 1 — Basic Scrabble
+---
+
+## Version 1 — Basic Scrabble
 
 The first version implements the fundamental mechanics of a terminal-based Scrabble game.
 
-Main Features
-15×15 Scrabble board
-support for multiple human players
-player racks with up to 7 letters
-configurable letter distribution
-configurable letter scoring
-custom pseudo-random letter shuffling
-horizontal and vertical word placement
-move validation
-letter exchange
-passing
-score tracking
-complete game loop
-Main Concepts
-Python
-Procedural Programming
-Dictionaries
-Lists and Tuples
-Matrix Representation
-Input Validation
-Game State Management
-Pseudo-Random Number Generation
-Bitwise Operations
-Turn-Based Game Logic
-Version 2 — Scrabble with AI Players
+### Main Features
+
+- 15×15 Scrabble board
+- support for multiple human players
+- player racks with up to 7 letters
+- configurable letter distribution
+- configurable letter scoring
+- custom pseudo-random letter shuffling
+- horizontal and vertical word placement
+- move validation
+- letter exchange
+- passing
+- score tracking
+- complete game loop
+
+### Main Concepts
+
+- Python
+- Procedural Programming
+- Dictionaries
+- Lists and Tuples
+- Matrix Representation
+- Input Validation
+- Game State Management
+- Pseudo-Random Number Generation
+- Bitwise Operations
+- Turn-Based Game Logic
+
+---
+
+## Version 2 — Scrabble with AI Players
 
 The second version extends the original project into a more advanced implementation.
 
 It introduces:
 
-Abstract Data Types
-dedicated abstractions for cells, players, vocabulary and board
-external vocabulary loading
-word scoring and filtering
-board-pattern generation
-automated word search
-human and AI players
-multiple AI difficulty levels
-more modular game architecture
+- Abstract Data Types
+- dedicated abstractions for cells, players, vocabulary and board
+- external vocabulary loading
+- word scoring and filtering
+- board-pattern generation
+- automated word search
+- human and AI players
+- multiple AI difficulty levels
+- more modular game architecture
 
-The game supports between 2 and 4 players, including both human players and computer-controlled agents.
+The game supports between **2 and 4 players**, including both human players and computer-controlled agents.
 
-AI Difficulty Levels
+### AI Difficulty Levels
 
 The automated players can operate at three different levels:
 
+```text
 FACIL
 MEDIO
 DIFICIL
+```
 
 The difficulty affects how much of the possible move space the agent evaluates before selecting a move.
 
+```text
 FACIL    -> smaller search space
 MEDIO    -> larger search space
 DIFICIL  -> more candidate moves evaluated
-Project Evolution
+```
+
+---
+
+## Project Evolution
 
 The progression between the two versions can be summarized as:
 
+```text
 Version 1
 Core Scrabble mechanics
         │
@@ -112,27 +127,33 @@ AI Players
         │
         ▼
 Multiple Difficulty Levels
-Board
+```
 
-Both versions use a:
+---
 
-15 × 15
+## Board
 
-board.
+Both versions use a **15 × 15 board**.
 
 Empty cells are represented by:
 
+```text
 .
+```
 
 Words can be placed horizontally or vertically.
 
 The first move must cross the center of the board:
 
+```text
 (8, 8)
+```
 
 Later moves must connect to letters already present on the board.
 
-Letter Bag
+---
+
+## Letter Bag
 
 The projects implement a letter bag containing different quantities of each letter.
 
@@ -140,66 +161,96 @@ The bag is shuffled using a custom pseudo-random number generator based on bitwi
 
 Using the same seed produces the same letter order, making the shuffle deterministic and reproducible.
 
-Word Validation
+---
+
+## Word Validation
 
 Before a word is placed, the game verifies that:
 
-it fits inside the board
-it respects the chosen direction
-overlapping letters match
-the player owns the required letters
-repeated letters do not exceed the available quantity
+- it fits inside the board
+- it respects the chosen direction
+- overlapping letters match
+- the player owns the required letters
+- repeated letters do not exceed the available quantity
 
 Version 2 additionally checks candidate words against an external vocabulary.
 
-Vocabulary System
+---
+
+## Vocabulary System
 
 Version 2 loads words from an external file.
 
 Words are organized internally according to:
 
+```text
 Word Length
     │
     └── First Letter
             │
             └── Candidate Words
+```
 
 This helps reduce the search space when looking for playable words.
 
-Automated Word Search
+---
+
+## Automated Word Search
 
 Version 2 can analyse the current board and generate possible word patterns.
 
 For example:
 
+```text
 C . S A
+```
 
 represents a pattern where one position must be completed using a letter from the player's rack.
 
 The system searches the vocabulary for valid words that:
 
-match existing letters
-fit the available spaces
-can be formed using the player's letters
-satisfy scoring constraints
+- match existing letters
+- fit the available spaces
+- can be formed using the player's letters
+- satisfy scoring constraints
 
 The best valid candidate can then be selected by an AI player.
 
-Player Actions
+---
+
+## Player Actions
 
 Players can perform three main actions.
 
-Play
+### Play
+
+```text
 J <row> <column> <direction> <word>
+```
 
 Example:
 
+```text
 J 8 6 H CASA
-Exchange Letters
+```
+
+### Exchange Letters
+
+```text
 T <letters>
-Pass
+```
+
+### Pass
+
+```text
 P
-Game Flow
+```
+
+---
+
+## Game Flow
+
+```text
 Initialize Game
       │
       ▼
@@ -234,47 +285,62 @@ Refill Player
       │
       ▼
 End Condition
-End Conditions
+```
+
+---
+
+## End Conditions
 
 The game ends when:
 
-all players pass consecutively
+- all players pass consecutively
 
 or
 
-a player has no letters left and the letter bag is empty
+- a player has no letters left and the letter bag is empty
 
 The final scores are returned at the end of the game.
 
-Technologies & Concepts
-Python
-Procedural Programming
-Abstract Data Types
-Dictionaries
-Lists and Tuples
-File I/O
-String Processing
-Search Algorithms
-Pattern Matching
-Game State Management
-Input Validation
-Pseudo-Random Number Generation
-AI Agents
-Turn-Based Game Logic
-Key Technical Highlights
+---
+
+## Technologies & Concepts
+
+- Python
+- Procedural Programming
+- Abstract Data Types
+- Dictionaries
+- Lists and Tuples
+- File I/O
+- String Processing
+- Search Algorithms
+- Pattern Matching
+- Game State Management
+- Input Validation
+- Pseudo-Random Number Generation
+- AI Agents
+- Turn-Based Game Logic
+
+---
+
+## Key Technical Highlights
 
 This repository demonstrates:
 
-implementation of a complete board game
-progression from procedural to more modular design
-custom pseudo-random shuffling
-board-state management
-move validation
-word-overlap handling
-external vocabulary processing
-automated word search
-AI-controlled players
-multiple difficulty levels
-Academic Context
+- implementation of a complete board game
+- progression from procedural to more modular design
+- custom pseudo-random shuffling
+- board-state management
+- move validation
+- word-overlap handling
+- external vocabulary processing
+- automated word search
+- AI-controlled players
+- multiple difficulty levels
 
-Developed as two consecutive projects for Programming Fundamentals at Instituto Superior Técnico (IST).
+---
+
+## Academic Context
+
+Developed as two consecutive projects for **Programming Fundamentals at Instituto Superior Técnico (IST)**.
+
+The repository shows the progression from fundamental Python programming and game-state management to more advanced abstraction, search algorithms and automated decision-making.
